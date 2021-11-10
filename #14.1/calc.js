@@ -15,10 +15,13 @@ function calc(operator, a, b) {
             result = a / b;
             result = result.toFixed(2); // просто хочу округлить
             break;
+        case 'pow':
+            result = a ** b;
+            break;
         default:
             result = 'unknown operation';
             break;
     }
     return isFinite(result) ? result : 'Error';
 }
-console.log(calc('div', 4, 3))
+
