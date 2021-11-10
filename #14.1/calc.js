@@ -3,7 +3,7 @@ function calc(operator, a, b) {
     let result = 0;
     switch(operator) {
         case 'sum':
-            result = a + b;
+            result = Number(a) + Number(b);
             break;
         case 'diff':
             result = a - b;
