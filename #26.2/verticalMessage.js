@@ -6,7 +6,7 @@ function showVerticalMessage(message) {
     }
 
     let verticalMessage = '';
-    message[0].toUpperCase() + message.slice(1);
+    message = message[0].toUpperCase() + message.slice(1);
     for(let i = 0; i < 10; i++) {
         if(message[i]) {
             verticalMessage += `${message[i]}\n`;
@@ -17,4 +17,4 @@ function showVerticalMessage(message) {
     console.log(verticalMessage);
     return verticalMessage;
 }
-showVerticalMessage('марафон')
+showVerticalMessage('марафон');
