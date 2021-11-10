@@ -1,27 +1,12 @@
 'use strict'
 function calc(operator, a, b) {
-    let result = 0;
-    switch(operator) {
-        case 'sum':
-            result = Number(a) + Number(b);
-            break;
-        case 'diff':
-            result = a - b;
-            break;
-        case 'multi':
-            result = a * b;
-            break;
-        case 'div':
-            result = a / b;
-            result = result.toFixed(2); // просто хочу округлить
-            break;
-        case 'pow':
-            result = a ** b;
-            break;
-        default:
-            result = 'unknown operation';
-            break;
-    }
+    let operations = {
+        sum: Number(a) + Number(b),
+        diff: a - b,
+        multi: a * b,
+        div: a / b, 
+        pow: a ** b,
+    };
+    let result = operations[operator];
     return isFinite(result) ? result : 'Error';
 }
-
