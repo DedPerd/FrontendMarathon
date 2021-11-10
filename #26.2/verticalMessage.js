@@ -2,7 +2,6 @@
 function showVerticalMessage(message) {
     if(typeof(message) !== 'string') {
         console.log(`TypeError: must be string, not ${typeof(message)}`);
-        return `TypeError: must be string, not ${typeof(message)}`;
     }
 
     let verticalMessage = '';
@@ -15,6 +14,5 @@ function showVerticalMessage(message) {
         }
     }
     console.log(verticalMessage);
-    return verticalMessage;
 }
 showVerticalMessage('марафон');
