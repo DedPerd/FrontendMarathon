@@ -2,17 +2,12 @@
 function showVerticalMessage(message) {
     if(typeof(message) !== 'string') {
         console.log(`TypeError: must be string, not ${typeof(message)}`);
+        return;
     }
-
-    let verticalMessage = '';
-    message = message[0].toUpperCase() + message.slice(1);
-    for(let i = 0; i < 10; i++) {
-        if(message[i]) {
-            verticalMessage += `${message[i]}\n`;
-        } else {
-            break;
-        }
+    message = message.slice(0, 10);
+    if(message[0] === 'м') message = message[0].toUpperCase() + message.slice(1);
+    for(let key of message) {
+        console.log(key);
     }
-    console.log(verticalMessage);
 }
 showVerticalMessage('марафон');
