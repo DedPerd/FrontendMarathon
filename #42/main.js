@@ -1,101 +1,76 @@
 'use strict'
-function isTouchDevice(){
-    return typeof window.ontouchstart !== 'undefined';
-}
-if(!isTouchDevice()) {
-    for(let prop of document.querySelectorAll('.keyboard__button')) {
-        prop.classList.add('keyboard__button-hover');
-        console.log(prop)
-    }
-}
+import View from './view.js';
+
 let calculator = {
-    displayedValue: '0',
+    view: View,
     firstValue: undefined,
     secondValue: undefined,
-    changingValue: 'firstValue',
-    operator: undefined,
-    updateView() {
-        document.querySelector('.calculator__display').children[0].innerText = this.displayedValue; 
-    },
-    buttonAnimation(button) { 
-        button.classList.add('keyboard__button_active');
-        setTimeout(() => {button.classList.remove('keyboard__button_active')}, 100);
-    },
+    changingValue: 'firstValue', 
+    operator: undefined, 
     clickHandler(event) {
         let button = this.getButton(event);
         if(button.button !== null) {
             //анимация------------------------
-            this.buttonAnimation(button.button);
+            this.view.buttonAnimation(button.button);
             //--------------------------------
 
             if(button.type === 'number') {
                 if(this.operator !== undefined && this.secondValue === undefined) {
                     this.changingValue = 'secondValue';
-                    this.displayedValue = '0';
+                    this.view.displayedValue = '0';
                 }
-                if(this.displayedValue === '0') {
-                    this.displayedValue = '';
+                if(this.view.displayedValue === '0') {
+                    this.view.displayedValue = '';
                 }
-                this.displayedValue += String(button.value);
+                this.view.displayedValue += String(button.value);
                 if(this.changingValue === 'firstValue') {
-                    this.firstValue = this.displayedValue;
+                    this.firstValue = this.view.displayedValue;
                 } else if( this.changingValue === 'secondValue') {
-                    this.secondValue = this.displayedValue;
+                    this.secondValue = this.view.displayedValue;
                 }
                 
-                this.updateView();
             } else if(button.type === 'operator') {
                 if(button.value === 'equal') {
                     if(this.operator === undefined || this.firstValue === undefined || this.secondValue === undefined) {
                         this.operator = undefined;
                         this.secondValue = undefined;
-                        this.firstValue = this.displayedValue;
+                        this.firstValue = this.view.displayedValue;
                         this.changingValue = 'firstValue';
                     } else {
-                        this.displayedValue = String(this.calc(this.operator, this.firstValue, this.secondValue));
-                        this.updateView();
-                        this.firstValue = this.displayedValue;
+                        this.view.displayedValue = String(this.calc(this.operator, this.firstValue, this.secondValue));
+                        this.firstValue = this.view.displayedValue;
                         this.secondValue = undefined;
                         this.changingValue = 'firstValue';
                     }
                 } else {
                     this.operator = button.value;
                     if(this.changingValue === 'secondValue') {
-                        this.displayedValue = String(this.calc(this.operator, this.firstValue, this.secondValue));
-                        this.updateView();
-                        this.firstValue = this.displayedValue;
+                        this.view.displayedValue = String(this.calc(this.operator, this.firstValue, this.secondValue));
+                        this.firstValue = this.view.displayedValue;
                         this.secondValue = undefined;
                         this.changingValue = 'firstValue'; 
                     }
                 }
             } else if(button.type === 'clear-all-input') {
-                this.displayedValue = '0';
+                this.view.displayedValue = '0';
                 this.firstValue = undefined;
                 this.secondValue = undefined;
                 this.operator = undefined;
                 this.changingValue = 'firstValue';
-                this.updateView();
             } else if(button.type === 'clear-the-most-resent-entry') {
                 this.operator = undefined;
-                this.displayedValue = this.displayedValue.slice(0, -1);
-                if(this.displayedValue === '' || this.displayedValue === '-') {
-                    this.displayedValue = '0';
+                this.view.displayedValue = this.view.displayedValue.slice(0, -1);
+                if(this.view.displayedValue === '' || this.view.displayedValue === '-') {
+                    this.view.displayedValue = '0';
                 }
-
                 if(this.changingValue === 'firstValue') {
-                    this.firstValue = this.displayedValue;
-                    console.log('ферст валуе')
+                    this.firstValue = this.view.displayedValue;
                 } else if( this.changingValue === 'secondValue') {
-                    this.secondValue = this.displayedValue;
-                    console.log('cеконд валуе')
+                    this.secondValue = this.view.displayedValue;
                 }
-                this.updateView()
-            }
-            // if(this.operator === undefined) {
-            //     this.firstValue = this.displayedValue;
-            // }
-            console.log(this);
-        }    
+            }   
+            this.view.updateView();
+        } 
     },
     getButton(event) {
         let button = {
@@ -136,7 +111,5 @@ let calculator = {
         return isFinite(result) ? result : 'Error';
     },
 };
-calculator.updateView();
+calculator.view.updateView();
 document.querySelector('.keyboard').addEventListener('click', (event) => {calculator.clickHandler(event)});
-   
-window.calculator = calculator;
