@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>TODO list</title>
+</head>
+<body>
+    <div class="todo">
+        <div class="todo__hight-priority-tasks">
+            <h2 class="todo__title">HIGH</h2>
+            <form action="#" class="todo__task task task_add-task">
+                <div class="task__checkbox" hidden>
+                    <input type="checkbox">
+                </div>
+                <input type="text" class="task__text" placeholder="Добавить важных дел">
+                <input type="image" src="./img/task__cross.svg" class="task__cross" alt="task__cross">   
+            </form>
+        </div>
+        <div class="todo__low-priority-tasks">
+            <h2 class="todo__title">LOW</h2>
+            <form action="#" class="todo__task task task_add-task">
+                <div class="task__checkbox" hidden>
+                    <input type="checkbox">
+                </div>
+                <input type="text" class="task__text" placeholder="Добавить">
+                <input type="image" src="./img/task__cross.svg" class="task__cross" alt="task__cross">
+                
+            </form>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>
