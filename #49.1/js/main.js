@@ -14,34 +14,43 @@ todo.addEventListener('click', function(event) {
             form.classList.add('task-done');
         }
     }
+    if(event.target.classList.contains('task')) {
+        const input = event.target.querySelector('.task__text');
+        input.focus();
+    }
 });
 
 for(let addTask of document.querySelectorAll('.task_add-task')) {
     addTask.addEventListener('submit', function(event) {
         const parentElement = addTask.parentElement;
+        let parentElementText = parentElement.querySelector('.task__text');
+
         const task = document.createElement('form');
         task.className = 'todo__task task';
+        task.onsubmit = function() {
+            return false;
+        }
+
         const checkbox = document.createElement('div');
         checkbox.className = 'task__checkbox';
+
         const text = document.createElement('input');
         text.className = 'task__text';
         text.type = 'text';
-        text.value = parentElement.querySelector('.task__text').value;
         text.placeholder = 'Пустая задача';
-        parentElement.querySelector('.task__text').value = '';
+        text.value = parentElementText.value;
+        parentElementText.value = '';
+
         const closeButton = document.createElement('img');
         closeButton.className = 'task__cross task__cross_close';
         closeButton.src = './img/task__cross.svg';
         closeButton.alt = 'task__cross';
-        task.append(checkbox, text, closeButton)
-        parentElement.append(task);
-        task.onsubmit = function() {
-            return false;
-        }
         closeButton.onclick = function() {
             task.remove();
         }
-       
+
+        task.append(checkbox, text, closeButton);
+        parentElement.append(task);
         event.preventDefault();
     });
 }
