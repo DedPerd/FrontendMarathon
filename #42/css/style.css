@@ -28,6 +28,7 @@ body {
     font-size: 96px;
     font-weight: 300;
     text-align: right;
+    overflow: auto;
 }
 .calculator__keyboard {
     font-size: 32px;

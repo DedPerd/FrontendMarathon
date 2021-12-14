@@ -1,7 +1,6 @@
-'use strict'
-import View from './view.js';
+import { View } from './view.js';
 
-let calculator = {
+let Calculator = {
     view: View,
     firstValue: undefined,
     secondValue: undefined,
@@ -111,5 +110,5 @@ let calculator = {
         return isFinite(result) ? result : 'Error';
     },
 };
-calculator.view.updateView();
-document.querySelector('.keyboard').addEventListener('click', (event) => {calculator.clickHandler(event)});
+Calculator.view.updateView();
+document.querySelector('.keyboard').addEventListener('click', (event) => {Calculator.clickHandler(event)});
